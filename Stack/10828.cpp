@@ -57,5 +57,6 @@ int main() {
             cout << stack.topNum() << endl;
         }
     }
+    
     return 0;
 }

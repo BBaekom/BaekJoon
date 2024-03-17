@@ -40,8 +40,6 @@ int main() {
 
     unordered_map<int, Child> nodes;
     vector<int> parents(N+1);
-
-
     
     for (int i = 0; i < N; i++) {
         cin >> parent >> left >> right;

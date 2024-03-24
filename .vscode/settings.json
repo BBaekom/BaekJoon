@@ -15,6 +15,8 @@
         "span": "cpp",
         "type_traits": "cpp",
         "unordered_map": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "list": "cpp",
+        "xhash": "cpp"
     }
 }

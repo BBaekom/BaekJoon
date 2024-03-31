@@ -17,6 +17,7 @@
         "unordered_map": "cpp",
         "xlocale": "cpp",
         "list": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "utility": "cpp"
     }
 }

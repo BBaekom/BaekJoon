@@ -20,6 +20,10 @@
         "xhash": "cpp",
         "utility": "cpp",
         "xiosbase": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "bitset": "cpp",
+        "iterator": "cpp",
+        "xmemory": "cpp",
+        "xtree": "cpp"
     }
 }

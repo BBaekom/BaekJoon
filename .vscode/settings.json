@@ -24,6 +24,9 @@
         "bitset": "cpp",
         "iterator": "cpp",
         "xmemory": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "ios": "cpp",
+        "stdexcept": "cpp",
+        "chrono": "cpp"
     }
 }

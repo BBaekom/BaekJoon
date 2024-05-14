@@ -27,6 +27,8 @@
         "xtree": "cpp",
         "ios": "cpp",
         "stdexcept": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "queue": "cpp",
+        "map": "cpp"
     }
 }

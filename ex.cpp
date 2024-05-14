@@ -1,85 +1,75 @@
 #include <iostream>
 #include <vector>
-#include <algorithm> // std::max
-
+#include <queue>
+#include <cstring>
 using namespace std;
-
 int N, M;
-vector<vector<int>> MAP;
-vector<vector<bool>> VISIT;
-int MAX = 1;
+int map[1001][1001];
+bool visited[1001][1001];
 
-// {서 북 동 남}의 상대적 위치
-int dy[] = {0, -1, 0, 1};
-int dx[] = {-1, 0, 1, 0};
-int wall[] = {1, 2, 4, 8};
+int dx[] = {0, 0, -1, 1};
+int dy[] = {1, -1, 0, 0};
 
-bool inRange(int y, int x) {
-    return 0 <= y && y < N && 0 <= x && x < M;
+bool compare(int x, int y) {
+    return x > 0 && x <= N && y > 0 && y <= M;
 }
 
-// 방의 넓이 반환
-int DFS(int y, int x) {
-    VISIT[y][x] = true;
-    int cnt = 0;
-    int wallValue = MAP[y][x];
-    for (int next = 0; next < 4; next++) {
-        int r = wallValue % 2; wallValue /= 2;
-        if (r == 0) {
-            int ty = y + dy[next], tx = x + dx[next];
-            if (inRange(ty, tx) && !VISIT[ty][tx]) {
-                cnt += DFS(ty, tx);
-            }
-        }
-    }
-    return 1 + cnt;
-}
-
-// 방의 개수 반환
-int DFSAll() {
-    VISIT.assign(N, vector<bool>(M, false));
-    int cnt = 0;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            if (!VISIT[i][j]) {
-                MAX = max(MAX, DFS(i, j));
+int bfs(int ni, int nj) {
+    queue<pair<int, int>> q;
+    q.push(make_pair(ni, nj));
+    visited[ni][nj] = true;
+    int cnt = 1;
+    while (!q.empty()) {
+        int tmpx = q.front().first;
+        int tmpy = q.front().second;
+        q.pop();
+        for (int i = 0; i < 4; i++) {
+            int x = tmpx + dx[i];
+            int y = tmpy + dy[i];
+            if (compare(x, y) && map[x][y] == 0 && visited[x][y] == false) {
+                visited[x][y] = true;
+                q.push(make_pair(x, y));
                 cnt++;
             }
         }
     }
+    
     return cnt;
 }
+
+void bfs_all() {
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= M; j++) {
+            if (map[i][j] == 1) {
+                memset(visited, false, sizeof(visited));
+                map[i][j] = bfs(i, j);
+            }
+        }
+    }
+
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= M; j++) {
+            cout << map[i][j] % 10;
+        }
+        cout << "\n";
+    }
+}
+
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    
-    cin >> M >> N;
-    MAP.assign(N, vector<int>(M, 0));
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            cin >> MAP[i][j];
+    cin >> N >> M;
+
+    for (int i = 1; i <= N; i++) {
+        string temp;
+        cin >> temp;
+        for (int j = 1; j <= M; j++) {
+            map[i][j] = temp[j-1] - '0';
         }
     }
-    
-    cout << DFSAll() << '\n';
-    cout << MAX << '\n';
-    MAX = 1;
-    
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            // 서 북 동 남순으로 벽을 부술 수 있으면 하나 씩 부수면서 시도
-            for (int b = 0; b < 4; b++) {
-                if (MAP[i][j] - wall[b] >= 0) {
-                    MAP[i][j] -= wall[b];
-                    DFSAll();
-                    MAP[i][j] += wall[b];
-                }
-            }
-        }
-    }
-    
-    cout << MAX << '\n';
+
+    bfs_all();
 
     return 0;
 }

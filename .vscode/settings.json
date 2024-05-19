@@ -29,6 +29,8 @@
         "stdexcept": "cpp",
         "chrono": "cpp",
         "queue": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "format": "cpp",
+        "cmath": "cpp"
     }
 }

@@ -8,3 +8,6 @@ int main(){
    
    return 0;
 }
+
+// command + shift + B - > compile
+// command + R -> execute
